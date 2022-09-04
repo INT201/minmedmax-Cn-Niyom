@@ -1,27 +1,20 @@
-const { template } = require('@babel/core')
+const {template} = require('@babel/core')
 
 function minMedMax(n1, n2, n3) {
-    let minMedMaxResult = { min: n1, mid: n2, max: n3 };
+    let array1 = [n1, n2, n3];
     let tem;
-    if(minMedMaxResult.min > minMedMaxResult.mid)
-    {
-        tem = minMedMaxResult.min;
-        minMedMaxResult.min = minMedMaxResult.mid;
-        minMedMaxResult.mid = tem;
+    for (let i = 0; i < array1.length; i++) {
+        for (let j = i + 1; j < array1.length; j++) {
+            if (array1[i] > array1[j]) {
+                tem = array1[i];
+                array1[i] = array1[j];
+                array1[j] = tem;
+            }
+        }
     }
-    if(minMedMaxResult.min > minMedMaxResult.max)
-    {
-        tem = minMedMaxResult.min;
-        minMedMaxResult.min = minMedMaxResult.max;
-        minMedMaxResult.max = tem;
-    }
-    if(minMedMaxResult.mid > minMedMaxResult.max)
-    {
-        tem = minMedMaxResult.max;
-        minMedMaxResult.max = minMedMaxResult.mid;
-        minMedMaxResult.mid = tem;
-    }
-    return minMedMaxResult;
+    return {min: array1[0], mid: array1[1], max: array1[2]}
 }
-console.log(minMedMax(4,3,2));
+
+console.log(minMedMax(-4, 3, 2));
 module.exports = minMedMax
+
